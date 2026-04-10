@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lebanon Mountain Restaurant — Accra</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Tajawal:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8cc7a;
+  --gold-dim: #7a6230;
+  --cream: #f7f0e3;
+  --deep: #0f0b07;
+  --cedar: #2d5016;
+  --crimson: #8b1a2a;
+  --text: #1a1410;
+  --muted: #6b5d4f;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: var(--deep);
+  color: var(--cream);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem 3rem;
+  background: linear-gradient(to bottom, rgba(15,11,7,0.95), transparent);
+  transition: background 0.4s;
+}
+nav.scrolled { background: rgba(15,11,7,0.98); border-bottom: 1px solid rgba(201,168,76,0.2); }
+.nav-logo { font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--cream); text-decoration: none; text-transform: uppercase; opacity: 0.8; transition: opacity 0.3s, color 0.3s; }
+.nav-links a:hover { opacity: 1; color: var(--gold); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; height: 100vh; min-height: 600px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(139,26,42,0.3) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(45,80,22,0.2) 0%, transparent 50%),
+    linear-gradient(160deg, #1a0f08 0%, #0f0b07 40%, #1a1206 100%);
+}
+.hero-pattern {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='1'%3E%3Cpath d='M30 0l4 8h8l-6 5 2 8-8-5-8 5 2-8-6-5h8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-video-wrap {
+  position: absolute; inset: 0; opacity: 0.15;
+}
+.hero-video-wrap video { width: 100%; height: 100%; object-fit: cover; }
+.hero-content {
+  position: relative; text-align: center; z-index: 2;
+  animation: heroFadeUp 1.4s cubic-bezier(0.16,1,0.3,1) both;
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow {
+  font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem;
+  animation: heroFadeUp 1.4s 0.2s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-title {
+  font-family: 'Cinzel', serif; font-size: clamp(2.8rem, 7vw, 6rem);
+  font-weight: 600; line-height: 1.05; letter-spacing: 0.04em;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, #a07830 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: heroFadeUp 1.4s 0.35s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.35rem); font-style: italic; font-weight: 300;
+  color: rgba(247,240,227,0.7); margin-top: 1rem;
+  animation: heroFadeUp 1.4s 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-arabic {
+  font-family: 'Tajawal', sans-serif; font-size: 1.1rem; direction: rtl;
+  color: var(--gold-dim); margin-top: 0.5rem;
+  animation: heroFadeUp 1.4s 0.65s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-divider {
+  width: 80px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 2rem auto;
+  animation: heroFadeUp 1.4s 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-cta {
+  display: inline-block; font-family: 'Cinzel', serif; font-size: 0.7rem;
+  letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none;
+  color: var(--deep); background: var(--gold);
+  padding: 1rem 2.5rem; border-radius: 0;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  animation: heroFadeUp 1.4s 0.8s cubic-bezier(0.16,1,0.3,1) both;
+  position: relative; overflow: hidden;
+}
+.hero-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold-light); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-cta:hover::before { transform: scaleX(1); }
+.hero-cta span { position: relative; z-index: 1; }
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  animation: heroFadeUp 1.4s 1.1s cubic-bezier(0.16,1,0.3,1) both;
+}
+.hero-scroll span { font-family: 'Cinzel', serif; font-size: 0.55rem; letter-spacing: 0.3em; color: var(--gold-dim); text-transform: uppercase; }
+.scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold-dim), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:0.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+
+/* ── SECTIONS BASE ── */
+section { padding: 7rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+/* ── ABOUT ── */
+.about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.about-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; }
+.about-title { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.2; color: var(--cream); margin-bottom: 2rem; }
+.about-title em { font-style: italic; color: var(--gold); }
+.about-body { font-size: 1.15rem; font-weight: 300; line-height: 1.9; color: rgba(247,240,227,0.75); margin-bottom: 1.5rem; }
+.about-arabic { font-family: 'Tajawal', sans-serif; direction: rtl; font-size: 1.3rem; color: var(--gold-dim); border-right: 3px solid var(--gold-dim); padding-right: 1rem; margin-top: 2rem; }
+.about-visual {
+  position: relative; aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #2a1a0e, #1a0f08);
+  border: 1px solid rgba(201,168,76,0.2);
+  overflow: hidden;
+}
+.about-visual::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.15), transparent 70%);
+}
+.about-cedar { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 8rem; opacity: 0.12; line-height: 1; }
+.about-badge {
+  position: absolute; bottom: 2rem; right: -1rem;
+  background: var(--gold); color: var(--deep);
+  padding: 1.2rem 1.5rem; text-align: center;
+  font-family: 'Cinzel', serif;
+}
+.about-badge .num { font-size: 2rem; font-weight: 600; display: block; line-height: 1; }
+.about-badge .txt { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-top: 0.2rem; }
+
+/* ── GOLD DIVIDER ── */
+.gold-rule { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent); margin: 0 auto; }
+
+/* ── FEATURES ── */
+.features-wrap { text-align: center; }
+.section-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+.section-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; color: var(--cream); margin-bottom: 1rem; }
+.section-title em { font-style: italic; color: var(--gold); }
+.section-sub { font-size: 1.05rem; color: rgba(247,240,227,0.55); font-weight: 300; max-width: 500px; margin: 0 auto 4rem; }
+
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.1); }
+.feature-card {
+  background: var(--deep); padding: 2.5rem 2rem; text-align: left;
+  transition: background 0.4s;
+  position: relative; overflow: hidden;
+}
+.feature-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.feature-card:hover { background: rgba(201,168,76,0.05); }
+.feature-card:hover::before { transform: scaleX(1); }
+.fc-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+.fc-title { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+.fc-list { list-style: none; }
+.fc-list li { font-size: 0.95rem; font-weight: 300; color: rgba(247,240,227,0.65); padding: 0.3rem 0; border-bottom: 1px solid rgba(201,168,76,0.06); display: flex; align-items: center; gap: 0.5rem; }
+.fc-list li::before { content: '—'; color: var(--gold-dim); font-size: 0.8rem; flex-shrink: 0; }
+
+/* ── GRILL VIDEO ── */
+.grill-wrap {
+  max-width: 100%; padding: 0; margin: 0;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #0a1a05, #051005);
+}
+.grill-inner { max-width: 1100px; margin: 0 auto; padding: 7rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.grill-video-wrap { position: relative; }
+.grill-video-wrap::before { content: ''; position: absolute; inset: -10px; border: 1px solid rgba(201,168,76,0.2); pointer-events: none; }
+.grill-video-wrap video { width: 100%; display: block; }
+.grill-text .section-label { text-align: left; }
+.grill-text .section-title { text-align: left; }
+.grill-text p { font-size: 1.1rem; font-weight: 300; line-height: 1.9; color: rgba(247,240,227,0.7); margin-bottom: 1.5rem; }
+
+/* ── LOCATION ── */
+.location-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.location-text .section-label { display: block; margin-bottom: 1rem; }
+.location-info { margin: 2.5rem 0; }
+.location-info-item { display: flex; gap: 1.2rem; margin-bottom: 1.8rem; }
+.loc-icon { color: var(--gold); font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.loc-label { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold-dim); text-transform: uppercase; display: block; margin-bottom: 0.3rem; }
+.loc-val { font-size: 1rem; font-weight: 300; color: rgba(247,240,227,0.8); }
+.btn-row { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em;
+  text-transform: uppercase; text-decoration: none;
+  background: var(--gold); color: var(--deep); padding: 1rem 2rem;
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1); border: none; cursor: pointer;
+  position: relative; overflow: hidden;
+}
+.btn-primary::after { content: '→'; position: absolute; right: -20px; transition: right 0.3s; }
+.btn-primary:hover { padding-right: 2.8rem; background: var(--gold-light); }
+.btn-primary:hover::after { right: 0.8rem; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.2em;
+  text-transform: uppercase; text-decoration: none;
+  background: transparent; color: var(--gold); padding: 1rem 2rem;
+  border: 1px solid rgba(201,168,76,0.4); cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.btn-secondary:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
+.map-placeholder {
+  background: linear-gradient(135deg, #1a1206, #0f0b07);
+  border: 1px solid rgba(201,168,76,0.2);
+  aspect-ratio: 4/3; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem;
+  position: relative; overflow: hidden;
+}
+.map-placeholder::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(201,168,76,0.06), transparent 70%);
+}
+.map-pin { font-size: 3rem; animation: pinBounce 2s ease-in-out infinite; }
+@keyframes pinBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.map-label { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.3em; color: var(--gold-dim); text-transform: uppercase; }
+
+/* ── CLAIM ── */
+.claim-wrap {
+  max-width: 100%; margin: 0; padding: 6rem 2rem;
+  background: linear-gradient(135deg, rgba(139,26,42,0.2), rgba(45,80,22,0.15));
+  border-top: 1px solid rgba(201,168,76,0.15);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  text-align: center;
+}
+.claim-inner { max-width: 700px; margin: 0 auto; }
+.claim-title { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 300; color: var(--cream); margin-bottom: 1rem; }
+.claim-title em { color: var(--gold); font-style: italic; }
+.claim-sub { font-size: 1.05rem; font-weight: 300; color: rgba(247,240,227,0.6); margin-bottom: 2.5rem; line-height: 1.8; }
+.claim-btn {
+  display: inline-block; font-family: 'Cinzel', serif; font-size: 0.75rem;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  background: transparent; color: var(--gold);
+  padding: 1.1rem 3rem; border: 1px solid var(--gold); cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.claim-btn:hover { background: var(--gold); color: var(--deep); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 3rem 2rem; text-align: center;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+.footer-logo { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 0.5rem; }
+.footer-sub { font-size: 0.85rem; font-weight: 300; color: rgba(247,240,227,0.3); }
+.footer-built { margin-top: 1.5rem; font-size: 0.75rem; color: rgba(247,240,227,0.2); }
+.footer-built a { color: var(--gold-dim); text-decoration: none; }
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .about-wrap, .grill-inner, .location-wrap { grid-template-columns: 1fr; gap: 3rem; }
+  .about-visual { aspect-ratio: 16/9; }
+  section { padding: 4rem 1.5rem; }
+  .grill-inner { padding: 4rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Lebanon Mountain</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#grill">Grill</a></li>
+    <li><a href="#visit">Visit</a></li>
+    <li><a href="#claim">Owners</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline>
+      <source src="media/welcomevideo.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Est. in Accra &nbsp;·&nbsp; Authentic Lebanese Cuisine</p>
+    <h1 class="hero-title">Lebanon<br>Mountain</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-subtitle">From the cedar-clad highlands of Lebanon<br>to your table in Accra</p>
+    <p class="hero-arabic">أهلاً وسهلاً — Ahlan wa Sahlan</p>
+    <div style="margin-top:2.5rem">
+      <a href="#visit" class="hero-cta"><span>Reserve a Table</span></a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="reveal">
+      <p class="about-label">Our Story</p>
+      <h2 class="about-title">A taste of the <em>mountains</em>, served with heart</h2>
+      <p class="about-body">Lebanon Mountain Restaurant carries forward generations of culinary tradition — each dish a journey through the ancient valleys and sun-drenched hills of the Levant. We use fresh ingredients and time-honoured recipes to bring authentic Lebanese flavour to the heart of Accra.</p>
+      <p class="about-body">Whether you arrive for a quiet lunch, a romantic evening, or a family feast, you leave with the warmth of genuine Lebanese hospitality.</p>
+      <p class="about-arabic">مرحبا بكم في مطعم جبل لبنان</p>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="about-visual">
+        <div class="about-cedar">🌲</div>
+        <div class="about-badge">
+          <span class="num">★ 4.5</span>
+          <span class="txt">Google Rating</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- FEATURES -->
+<section id="experience">
+  <div class="features-wrap">
+    <p class="section-label reveal">What we offer</p>
+    <h2 class="section-title reveal reveal-delay-1">Every detail <em>considered</em></h2>
+    <p class="section-sub reveal reveal-delay-2">A complete dining experience — from arrival to the last bite of dessert</p>
+    <div class="features-grid">
+
+      <div class="feature-card reveal">
+        <span class="fc-icon">🍽️</span>
+        <p class="fc-title">Dining Options</p>
+        <ul class="fc-list">
+          <li>Dine-in</li>
+          <li>Takeaway</li>
+          <li>Delivery</li>
+          <li>Drive-through</li>
+          <li>Outdoor seating</li>
+          <li>Table service</li>
+        </ul>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="fc-icon">🥘</span>
+        <p class="fc-title">Menu Highlights</p>
+        <ul class="fc-list">
+          <li>Breakfast & Brunch</li>
+          <li>Lunch & Dinner</li>
+          <li>Late-night food</li>
+          <li>Small plates</li>
+          <li>Great desserts</li>
+          <li>Great coffee</li>
+        </ul>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="fc-icon">🍷</span>
+        <p class="fc-title">Drinks</p>
+        <ul class="fc-list">
+          <li>Wine selection</li>
+          <li>Beer on tap</li>
+          <li>Coffee & espresso</li>
+          <li>Alcohol served</li>
+        </ul>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="fc-icon">✨</span>
+        <p class="fc-title">Atmosphere</p>
+        <ul class="fc-list">
+          <li>Casual & cosy</li>
+          <li>Romantic setting</li>
+          <li>Quiet & relaxed</li>
+          <li>Trendy interior</li>
+          <li>Good for groups</li>
+          <li>Welcoming for solo</li>
+        </ul>
+      </div>
+
+      <div class="feature-card reveal">
+        <span class="fc-icon">💳</span>
+        <p class="fc-title">Payments</p>
+        <ul class="fc-list">
+          <li>Credit & debit cards</li>
+          <li>NFC mobile payments</li>
+          <li>Accepts reservations</li>
+          <li>Catering available</li>
+        </ul>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="fc-icon">♿</span>
+        <p class="fc-title">Access & Parking</p>
+        <ul class="fc-list">
+          <li>Wheelchair accessible</li>
+          <li>Accessible toilets</li>
+          <li>Free street parking</li>
+          <li>Free parking lot</li>
+          <li>Plenty of parking</li>
+          <li>Good for kids</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- GRILL VIDEO -->
+<div class="grill-wrap" id="grill">
+  <div class="grill-inner">
+    <div class="grill-video-wrap reveal">
+      <video controls poster="">
+        <source src="media/grillperfection.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="grill-text reveal reveal-delay-2">
+      <p class="section-label">The craft</p>
+      <h2 class="section-title" style="text-align:left">Grill <em>perfection</em></h2>
+      <p>The art of Lebanese grilling is centuries old — open flame, hand-marinated cuts, spices sourced with intention. Our chefs honour that tradition every service, every plate.</p>
+      <p>Watch what happens when patience meets fire.</p>
+    </div>
+  </div>
+</div>
+
+<!-- VISIT / LOCATION -->
+<section id="visit">
+  <div class="location-wrap">
+    <div class="location-text reveal">
+      <span class="section-label">Find us</span>
+      <h2 class="section-title" style="text-align:left;margin-bottom:0.5rem">Come <em>visit</em></h2>
+      <div class="location-info">
+        <div class="location-info-item">
+          <span class="loc-icon">📍</span>
+          <div>
+            <span class="loc-label">Address</span>
+            <span class="loc-val">Accra, Ghana<br><span style="opacity:0.6;font-size:0.9rem">See full directions on Google Maps</span></span>
+          </div>
+        </div>
+        <div class="location-info-item">
+          <span class="loc-icon">📞</span>
+          <div>
+            <span class="loc-label">WhatsApp</span>
+            <span class="loc-val">+233 055 606 8305</span>
+          </div>
+        </div>
+        <div class="location-info-item">
+          <span class="loc-icon">🕐</span>
+          <div>
+            <span class="loc-label">Hours</span>
+            <span class="loc-val">Breakfast through late-night<br><span style="opacity:0.6;font-size:0.9rem">See Google Maps for current hours</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <a href="https://www.google.com/maps/place/Lebanon+mountain+restaurant/data=!4m2!3m1!1s0xfdf9b3073bea159:0xcd360b9c99179743" target="_blank" class="btn-primary">View on Google Maps</a>
+        <button class="btn-secondary" onclick="window.open('https://wa.me/233556068305','_blank')">Message on WhatsApp</button>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="map-placeholder">
+        <div class="map-pin">📍</div>
+        <span class="map-label">Lebanon Mountain Restaurant</span>
+        <span style="font-size:0.8rem;color:rgba(247,240,227,0.3);font-weight:300">Accra, Ghana</span>
+        <a href="https://www.google.com/maps/place/Lebanon+mountain+restaurant/data=!4m2!3m1!1s0xfdf9b3073bea159:0xcd360b9c99179743" target="_blank" style="margin-top:1rem;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--gold);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(201,168,76,0.3);padding-bottom:2px;">Open in Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLAIM -->
+<div class="claim-wrap" id="claim">
+  <div class="claim-inner reveal">
+    <p class="section-label">Business owner?</p>
+    <h2 class="claim-title">This page was built <em>for you</em></h2>
+    <p class="claim-sub">We created this page to show you what a professional online presence could look like for Lebanon Mountain Restaurant. Claim it to take ownership — update your menu, add photos, and start turning visitors into customers.</p>
+    <button class="claim-btn" onclick="window.open('https://wa.me/233557507660?text=I%20am%20the%20owner%20of%20Lebanon%20Mountain%20Restaurant%20and%20would%20like%20to%20claim%20this%20page.','_blank')">Claim This Page</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Lebanon Mountain</p>
+  <p class="footer-sub">Authentic Lebanese Cuisine &nbsp;·&nbsp; Accra, Ghana</p>
+  <p class="footer-built">Preview site by <a href="https://yooku98.github.io/Portfolio-Website" target="_blank">YookuInc</a></p>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
