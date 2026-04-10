@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes, maximum-scale=5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Treehouse Restaurant — Accra | Outdoor Dining & Chill Vibes</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -41,11 +43,13 @@ body {
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 1rem 2.5rem;
+  padding: max(1rem, env(safe-area-inset-top)) max(2.5rem, env(safe-area-inset-right)) 1rem max(2.5rem, env(safe-area-inset-left));
   background: rgba(45, 80, 22, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s;
+  width: 100vw;
+  box-sizing: border-box;
 }
 nav.scrolled { 
   background: rgba(45, 80, 22, 0.98);
@@ -87,7 +91,8 @@ nav.scrolled {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-top: 60px;
+  margin-top: max(60px, calc(60px + env(safe-area-inset-top)));
+  padding: 0 max(0px, env(safe-area-inset-right)) 0 max(0px, env(safe-area-inset-left));
 }
 .hero-bg {
   position: absolute;
@@ -169,7 +174,11 @@ nav.scrolled {
 }
 
 /* ── SECTIONS BASE ── */
-section { padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; }
+section { 
+  padding: 5rem max(2rem, env(safe-area-inset-right)) 5rem max(2rem, env(safe-area-inset-left));
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
 
 /* ── LABELS & TITLES ── */
 .section-label {
@@ -525,21 +534,61 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  nav { padding: 0.8rem 1.5rem; }
+  nav { 
+    padding: max(0.8rem, env(safe-area-inset-top)) max(1.5rem, env(safe-area-inset-right)) 0.8rem max(1.5rem, env(safe-area-inset-left));
+  }
   .nav-links { display: none; }
   .about-wrap, .location-wrap, .video-showcase {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  section { padding: 3rem 1.5rem; }
+  section { 
+    padding: 3rem max(1.5rem, env(safe-area-inset-right)) 3rem max(1.5rem, env(safe-area-inset-left));
+  }
   .hero {
-    margin-top: 50px;
-    height: calc(100vh - 50px);
+    margin-top: max(50px, calc(50px + env(safe-area-inset-top)));
+    height: 100vh;
+    padding: 0 max(0px, env(safe-area-inset-left)) 0 max(0px, env(safe-area-inset-right));
   }
   .hero-title { font-size: clamp(1.8rem, 5vw, 3rem); }
   .btn-group { flex-direction: column; }
-  .btn { width: 100%; }
+  .btn { width: 100%; min-height: 44px; }
   .footer-contact { flex-direction: column; gap: 1rem; }
+}
+
+/* ── SAFE AREA SUPPORT ── */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* ── MINIMUM TOUCH TARGET SIZE (44x44 px) ── */
+a, button, .btn {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── CLAIM SECTION ── */
+.claim-wrap {
+  background: linear-gradient(135deg, rgba(26, 48, 9, 0.8), rgba(45, 80, 22, 0.9));
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── LANDSCAPE MODE ADJUSTMENTS ── */
+@media (max-height: 600px) and (orientation: landscape) {
+  nav { padding-top: max(0.5rem, env(safe-area-inset-top)); }
+  .hero { height: auto; min-height: 50vh; margin-top: max(50px, calc(50px + env(safe-area-inset-top))); }
+  .hero-cta { padding: 0.75rem 1.5rem; }
 }
 </style>
 </head>
@@ -785,6 +834,20 @@ footer {
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.6516509638707!2d-0.17477072346649783!3d5.560888833923804!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf91435a310c15%3A0x3c7c14eef2e15d4c!2sTreehouse%20Restaurant!5e0!3m2!1sen!2sgh!4v1712676000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CLAIM -->
+<section id="claim" style="text-align: center;">
+  <div class="claim-wrap reveal">
+    <p class="section-label">Restaurant Owner?</p>
+    <h2 class="section-title">This page was built <em>for you</em></h2>
+    <p style="font-size: 1.05rem; line-height: 1.8; color: rgba(255, 255, 255, 0.85); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+      We created this beautiful website to showcase what a professional online presence could do for Treehouse Restaurant. Claim it now to take full ownership — update your photos, manage your menu, add special announcements, and start converting visitors into loyal customers.
+    </p>
+    <button class="btn btn-primary" onclick="window.open('tel:0599400737')">📞 Claim This Site</button>
   </div>
 </section>
 
